@@ -7,6 +7,8 @@ namespace CompressionAlgorithm
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            // I AM CONTRIBUTING!
         }
     }
 }
