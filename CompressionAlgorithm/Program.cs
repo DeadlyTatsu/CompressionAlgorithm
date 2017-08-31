@@ -6,9 +6,15 @@ namespace CompressionAlgorithm
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // 1. Load file to a string
 
-            // I AM CONTRIBUTING! AGAIN!
+            // 2. Check for patterns
+
+            // 3. Create a dicctionary
+
+            // 4. Compress string
+
+            // 5. Send string back to a file
         }
     }
 }
