@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 
 namespace CompressionAlgorithm
 {
@@ -6,15 +8,25 @@ namespace CompressionAlgorithm
     {
         static void Main(string[] args)
         {
-            // 1. Load file to a string
+            Stopwatch stopwatch = Stopwatch.StartNew(); 
 
-            // 2. Check for patterns
+            // 1. Load file to a string (return string)
+            string readText = File.ReadAllText("C:\\Users\\torbe\\Desktop\\Camellia_-_Danger_Drug_Nakano_Yuko_Compulsion [0.9x].osu");
 
-            // 3. Create a dicctionary
+            // 2. Check for patterns (return string[] with most reoccuring patterns first)
+            string[] patterns = CheckForPatterns.Start(readText);
 
-            // 4. Compress string
+            // 3. Create a dicctionary and apprehend it to the string (return string)
+
+            // 4. Compress string (return string)
 
             // 5. Send string back to a file
+
+            stopwatch.Stop();
+            Console.WriteLine("Time: " + stopwatch.ElapsedMilliseconds + "ms");
+
+            Console.ReadKey();
+
         }
     }
 }
