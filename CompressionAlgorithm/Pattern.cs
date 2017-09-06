@@ -6,27 +6,43 @@ namespace CompressionAlgorithm
 {
     class Pattern
     {
-        public string _characters;
-        public int _occurances = 1;
+        private string _characters;
+        private int _occurrences;
+        private int _score;
 
-        public Pattern (string characters)
+        public string characters
+        {
+            get { return _characters; }
+        }
+
+        public int occurrences
+        {
+            get { return _occurrences; }
+        }
+        public int score
+        {
+            get { return _score; }
+        }
+
+
+        public Pattern (string characters, int occurances = 1)
         {
             _characters = characters;
+            _occurrences = occurances;
+
+            SetScore();
         }
 
-        public void AddOccurance()
+        public void AddOccurence()
         {
-            _occurances++;
+            _occurrences++;
+
+            SetScore();
         }
 
-        // Default comparer for Pattern type.
-        public int CompareTo(Pattern comparePart)
+        public void SetScore()
         {
-            // A null value means that this object is greater.
-            if (comparePart == null)
-                return 1;
-            else
-                return this._occurances.CompareTo(comparePart._occurances);
+            _score = (_characters.Length * _occurrences) - (_characters.Length + _occurrences + 3);
         }
     }
 }

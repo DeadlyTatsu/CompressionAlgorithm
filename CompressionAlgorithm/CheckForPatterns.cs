@@ -10,18 +10,21 @@ namespace CompressionAlgorithm
     {
         public static string[] Start(string input)
         {
+            Console.WriteLine("[Pattern Recognition Started]");
+
+            input = input.Replace(' ', '_');
             // how many char-patterns to look for
             int num = 3;
 
-            List<List<Pattern>> AllPatternLists = new List<List<Pattern>>() ;
-            int amoutPatterns = 0;
+            List<List<string>> NCharList = new List<List<string>>() ;
+            List<Pattern> Patterns = new List<Pattern>();
 
             // First check 2-char patterns, then go to 3 ect...
             for (int a = 2; a < num + 1; a++)
             {
                 // Create a list for every char patter type (2chars, 3chars, 4chars etc.)
-                List<Pattern> list = new List<Pattern>();
-                AllPatternLists.Add(list);
+                List<string> list = new List<string>();
+                NCharList.Add(list);
 
                 // Loop through all pattern combinations
                 for (int i = 0; i < input.Length - a; i++)
@@ -35,29 +38,34 @@ namespace CompressionAlgorithm
                     }
 
                     // Add the string to a list
-                    Pattern p = new Pattern(pattern);
-                    AllPatternLists[a - 2].Add(p);                    
+                    NCharList[a - 2].Add(pattern);                    
                 }
 
-                // TODO: COUNT THE OCCURANCES OF THE STRINGS
-
-                AllPatternLists[a - 2] = AllPatternLists[a - 2].OrderBy(x => -x._occurances).ToList();
-                amoutPatterns += AllPatternLists[a - 2].Count;
+                Console.WriteLine("Amount of {0}-char patterns found: {1}", a, NCharList[a - 2].Count);
             }
 
-            List<Pattern> mergedPatternList = new List<Pattern>(amoutPatterns);
-
-            for (int i = 0; i < AllPatternLists.Count; i++)
+            foreach (var patternList in NCharList)
             {
-                mergedPatternList.AddRange(AllPatternLists[i]);
+                patternList.Sort();
+
+                while (patternList.Count != 0)
+                {
+                    int index = patternList.FindLastIndex(x => x == patternList[0]);
+                    int occurances = index + 1;
+                    Pattern p = new Pattern(patternList[0], occurances);
+                    Patterns.Add(p);
+                    patternList.RemoveRange(0, occurances);
+                }
+
+                Console.WriteLine("Uniqe patterns found: {0},", Patterns.Count
+                    );
             }
 
-            mergedPatternList = mergedPatternList.OrderBy(x => -x._occurances).ToList();
-
+            Patterns = Patterns.OrderBy(x => -x.occurrences).ToList();
 
             for (int i = 0; i < 100; i++)
             {
-                Console.WriteLine("'" + Regex.Escape(mergedPatternList[i]._characters) + "' : " + mergedPatternList[i]._occurances);
+                Console.WriteLine("'" + Regex.Escape(Patterns[i].characters) + "' : " + Patterns[i].occurrences);
             }
 
             return null;

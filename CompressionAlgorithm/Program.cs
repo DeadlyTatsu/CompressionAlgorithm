@@ -11,10 +11,10 @@ namespace CompressionAlgorithm
             Stopwatch stopwatch = Stopwatch.StartNew(); 
 
             // 1. Load file to a string (return string)
-            string readText = File.ReadAllText("C:\\Users\\torbe\\Desktop\\Camellia_-_Danger_Drug_Nakano_Yuko_Compulsion [0.9x].osu");
+            string readText = File.ReadAllText("C:\\Sverige–Wikipedia.html");
 
             // 2. Check for patterns (return string[] with most reoccuring patterns first)
-            string[] patterns = CheckForPatterns.Start(readText);
+            string[] patterns = CheckForPatterns2.Start(readText);
 
             // 3. Create a dicctionary and apprehend it to the string (return string)
 
